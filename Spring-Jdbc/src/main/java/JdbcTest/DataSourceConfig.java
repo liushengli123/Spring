@@ -1,6 +1,7 @@
-package test;
+package JdbcTest;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -8,11 +9,16 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.jdbc.JdbcTestUtils;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
+import java.beans.PropertyVetoException;
+@Configuration
+@ComponentScan("JdbcTest")
 @PropertySource("classpath:jdbc.properties")
-public class DataSourceConfiguration {
+public class DataSourceConfig {
     @Value("${jdbc.driver}")
     private String driver;
     @Value("${jdbc.url}")
