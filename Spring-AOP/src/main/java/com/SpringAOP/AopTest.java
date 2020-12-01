@@ -17,5 +17,6 @@ public class AopTest {
       @Test
       public void test(){
           target.save();
+            System.out.println("1111");
       }
 }
