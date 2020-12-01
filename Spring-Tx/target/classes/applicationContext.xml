@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:comtext="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd">
+<!--    配置配置文件的路径-->
+    <comtext:property-placeholder location="jdbc.properties"/>
+<!--    配置数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"></property>
+        <property name="JdbcUrl" value="${jdbc.url}"></property>
+        <property name="user" value="${jdbc.user}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+<!--    配置jdbcTemplate的bean-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+            <property name="dataSource" ref="dataSource"></property>
+    </bean>
+<!--    <bean id="accountDao" class="com.trasacation.dao.impl.AccountDaoImpl"/>-->
+<!--    <bean id="accountService" class="com.trasacation.service.Impl.AccountServiceImpl"/>-->
+
+<!--    配置事务管理器-->
+    <bean id="transactionmanager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+<!--&lt;!&ndash;    通知，事务的增强&ndash;&gt;-->
+<!--    <tx:advice id="txAdvice" transaction-manager="transactionmanager">-->
+<!--        <tx:attributes>-->
+<!--&lt;!&ndash;            配置哪些方法需要增强 isolation：事务的隔离级别 timeout：延迟 propagation: 配置传播行为 read-only:只读&ndash;&gt;-->
+<!--            <tx:method name="transfer" isolation="READ_UNCOMMITTED" timeout="-1" propagation="MANDATORY"/>-->
+<!--            <tx:method name="*"/>-->
+<!--        </tx:attributes>-->
+<!--    </tx:advice>-->
+<!--&lt;!&ndash;    配置事务的aop织入&ndash;&gt;-->
+<!--    <aop:config>-->
+<!--        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.trasacation.service.Impl.*.*(..))"/>-->
+<!--    </aop:config>-->
+
+<!--    配置声明式事务的注解-->
+    <tx:annotation-driven transaction-manager="transactionmanager"/>
+<!--    配置扫描包-->
+    <comtext:component-scan base-package="com.trasacation"/>
+</beans>
