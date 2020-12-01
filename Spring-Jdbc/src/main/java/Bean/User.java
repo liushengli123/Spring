@@ -1,23 +1,23 @@
 package Bean;
 
 public class User {
-    private String username;
+    private String name;
     private int age;
 
     public User() {
     }
 
-    public User(String username, int age) {
-        this.username = username;
+    public User(String name, int age) {
+        this.name = name;
         this.age = age;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAge() {
@@ -31,7 +31,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "name='" + name + '\'' +
                 ", age=" + age +
                 '}';
     }
