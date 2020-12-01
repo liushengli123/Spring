@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!--    无参构造器的方式实例化bean <bean id="userDao" class="com.spring.Impl.UserDaoImpl" scope="singleton" init-method="init" destroy-method="destroy"></bean>-->
+<!--    静态工厂实例化bean <bean id="userDao" class="com.spring.StaticFactory" factory-method="getUserDao"></bean>-->
+<!--    非静态方法时实例化bean对象-->
+    <bean id="factory" class="com.spring.StaticFactory"></bean>
+    <bean id="userDao" factory-bean="factory" factory-method="getUserDao"></bean>
+
+</beans>
