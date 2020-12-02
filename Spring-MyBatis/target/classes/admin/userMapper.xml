@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--映射文件DTD约束头-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间 与下面id组成查询唯一标识-->
+<mapper namespace="userMapper">
+    <select id="findAll" resultType="user">
+    select * from  admin
+   </select>
+
+    <insert id="save" parameterType="admin.User">
+        insert into admin values(#{username},#{password})
+    </insert>
+
+    <update id="update" parameterType="admin.User">
+        update admin set password=#{password} where username=#{username}
+    </update>
+
+    <delete id="delete" parameterType="admin.User">
+        delete from admin where username=#{username}
+    </delete>
+</mapper>
