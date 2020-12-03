@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--映射文件DTD约束头-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--动态sql查询-->
+<mapper namespace="dao.UserDao">
+    <select id="findbyCollection" resultType="user" parameterType="user">
+        select * from admin
+        <where>
+            <if test="username!=null">
+                and username=#{username}
+            </if>
+            <if test="password!=null">
+                and password=#{password}
+            </if>
+        </where>
+    </select>
+    <select id="findlist" resultType="user" parameterType="list">
+        select * from admin
+        <where>
+            <foreach collection="list" open="username in (" close=")" separator="," item="username">
+                #{username}
+            </foreach>
+        </where>
+    </select>
+</mapper>

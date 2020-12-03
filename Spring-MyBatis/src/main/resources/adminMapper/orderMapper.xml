@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--映射文件DTD约束头-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  一对一形式的多表查询-->
+<mapper namespace="dao.OrderMapper">
+<!--    注意：此时的映射结果类型应为查询结果类型-->
+    <resultMap id="manager" type="order">
+        <id column="oid" property="id"/>
+        <result column="datetime" property="datetime"/>
+        <result column="total" property="total"/>
+<!--        普通映射对象-->
+<!--        <result column="uid" property="manager.id"/>-->
+<!--        <result column="name" property="manager.name"/>-->
+<!--        <result column="sex" property="manager.sex"/>-->
+<!--        <result column="age" property="manager.age"/>-->
+        <association property="manager" javaType="manager">
+            <id column="uid" property="id"/>
+            <result column="name" property="name"/>
+            <result column="age" property="age"/>
+            <result column="sex" property="sex"/>
+        </association>
+    </resultMap>
+    <select id="findAll"  resultMap="manager">
+       select *,o.id as oid,m.id as uid from orders o,manager m where o.uid=m.id
+    </select>
+</mapper>

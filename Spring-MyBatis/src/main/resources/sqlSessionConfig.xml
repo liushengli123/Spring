@@ -9,7 +9,15 @@
 <!--    为包名取别名-->
     <typeAliases>
         <typeAlias type="admin.User" alias="user"/>
+        <typeAlias type="admin.Manager" alias="manager"/>
+        <typeAlias type="admin.Order" alias="order"/>
     </typeAliases>
+<!--    配置分页查询插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+        </plugin>
+    </plugins>
     <environments default="development">
         <environment id="development">
 <!--            配置事务管理器-->
@@ -25,6 +33,9 @@
     </environments>
     <!--    配置mapper映射文件-->
     <mappers>
-        <mapper resource="admin/userMapper.xml"/>
+        <mapper resource="adminMapper/userMapper.xml"/>
+        <mapper resource="adminMapper/user1Mapper.xml"/>
+        <mapper resource="adminMapper/orderMapper.xml"/>
+        <mapper resource="adminMapper/managerMapper.xml"/>
     </mappers>
 </configuration>

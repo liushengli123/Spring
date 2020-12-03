@@ -1,4 +1,6 @@
 import admin.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -19,15 +21,25 @@ public class Test {
         SqlSession sqlSession=sqlSessionFactory.openSession();
         return sqlSession;
     }
-//      查询数据
+//      查询数据 集成pageHelper实现分页显示
     @org.junit.Test
     public void test() throws IOException {
 //        加载核心配置文件
         Test test=new Test();
         SqlSession sqlSession = test.getSqlSession();
+//        分页查询语句
+        PageHelper.startPage(1,2);
 //        获取sql查询语句
         List<User> userList=sqlSession.selectList("userMapper.findAll");
-        System.out.println(userList);
+        for (User user:userList
+             ) {
+            System.out.println(user);
+        }
+        PageInfo<User> pageInfo=new PageInfo<User>(userList);
+        System.out.println("当前页："+pageInfo.getPageNum());
+        System.out.println("总条数："+pageInfo.getTotal());
+        System.out.println("总页数："+pageInfo.getPages());
+        System.out.println("页大小："+pageInfo.getPageSize());
         sqlSession.close();
     }
 //    插入数据

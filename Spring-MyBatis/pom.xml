@@ -25,5 +25,16 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
+<!--        加入分页查询插件的依赖包-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+            <version>0.9.1</version>
+        </dependency>
     </dependencies>
 </project>
